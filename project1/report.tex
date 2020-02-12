@@ -11,9 +11,9 @@
 
 \section{Introduction}
 \subsection{Problem set}
-Today everything is moving online. Advertising your car by using services online is very common. So how much is your car worth? How do you categorize the price range of your car? This project focuses on how to predict the value of car, based the car features.
+Today everything is moving online. Advertising your car by using services online is very common. So how much is your car worth? How do you categorize the price range of your car? This project focuses on how to predict the value of cars, based the car features.
 
-The dataset choosen for this project is the car evaluation data set created by Marko Bohanec. This dataset contains information about 1728 cars.
+The data set chosen for this project is the car evaluation data set created by Marko Bohanec. This data set contains information about 1728 cars.
 
 \begin{itemize}
   \item buying: vhigh, high, med, low.
@@ -22,32 +22,32 @@ The dataset choosen for this project is the car evaluation data set created by M
   \item persons: 2, 4, more.
   \item lug-boot: small, med, big.
   \item safety: low, med, high.
-  \item Acceptibility: unnac, acc, good, v-good
+  \item Acceptability: unnac, acc, good, v-good
 \end{itemize}
 
-Based on maintainence costs, number of doors, how many persons that fits in the car, boot size, acceptibility and safety rating we will try to make a model that predicts the buying price of the car. The model will use 6 predictors to classify wich class the car is in. The predictors are maintainence, number of doors, number of persons that can fit in the car, luggage size, acceptibility and safety.
+Based on maintenance costs, number of doors, how many persons that fits in the car, boot size, acceptability and safety rating we will try to make a model that predicts the buying price of the car. The model will use 6 predictors to classify which class the car is in. The predictors are maintenance, number of doors, number of persons that can fit in the car, luggage size, acceptability and safety.
 
 
-\subsection{Dataset}
+\subsection{Data set}
 \paragraph{Usage}
-The car evaluation has been referenced in many scientifc papers. Amongst the most noteworthy are:
+The car evaluation has been referenced in many scientific papers. Amongst the most noteworthy are:
 \begin{itemize}
 \item MML Inference of Decision Graphs with Multi-way Joins and Dynamic Attributes \cite{mml-interference}
-\item Stopping Criterion for Boosting-Based Data Reduction Techniques: from Binary to Multiclass Problem \cite{boosting}
+\item Stopping Criterion for Boosting-Based Data Reduction Techniques: from Binary to Multi class Problem \cite{boosting}
 \item Impact of learning set quality and size on decision tree performance \cite{learning-set}
 \end{itemize}
 
-The data set was used as an example for displaying multiattribute decition-making \cite{dataset-usage}.
+The data set was used as an example for displaying multi attribute decision-making \cite{dataset-usage}.
 
 \paragraph{Generation}
-According to Bohanec the Car evaluation data set was created from a hierarchical decition model. This model was created for the demonstration of a decition makeing software called DEX \cite{dataset}.
+According to Bohanec the Car evaluation data set was created from a hierarchical decision model. This model was created for the demonstration of a decision making software called DEX \cite{dataset}.
 
 \section{Classification}
 \subsection{C5.0}
-I decided to use C5.0 for the classification. It is free and easy use. C5.0 is an algorithm to produce decition trees for classification purposes. For configuring the data and running the algorithm I used R. In R you can use the C5.0 package to generate basic tree-models and rule-based models. In this chapter I will present my findings when using this algorithm on the car evaluation dataset. To help me get started with R and the c5.0 algorithm I used this guide.
+I decided to use C5.0 for the classification. It is free and easy use. C5.0 is an algorithm to produce decision trees for classification purposes. For configuring the data and running the algorithm I used R. In R you can use the C5.0 package to generate basic tree-models and rule-based models. In this chapter I will present my findings when using this algorithm on the car evaluation data set. To help me get started with R and the C5.0 algorithm I used this guide \cite{guide}.
 
 \subsection{Findings}
-When running the C5.0 algorithm on the car evalutation dateset we found that the accrucy was not very high. We got a 55 percent error rate when using all the predictors. The summary of the first run can bee seen in figure \ref{fig:tree-summary} and the decition tree generated can be seen in figure \ref{fig:decition-tree}.
+When running the C5.0 algorithm on the car evaluation dateset we found that the accuracy was not very high. We got a 55 percent error rate when using all the predictors. The summary of the first run can bee seen in figure \ref{fig:tree-summary} and the decision tree generated can be seen in figure \ref{fig:decition-tree}.
   \begin{figure}[h]
     \centering 
     \includegraphics[width=0.6\textwidth]
@@ -60,7 +60,7 @@ When running the C5.0 algorithm on the car evalutation dateset we found that the
     \centering 
     \includegraphics[width=0.6\textwidth]
     {images/tree}
-    \caption{Decition-tree}
+    \caption{Decision-tree}
     \label{fig:decition-tree}
   \end{figure}
   \subsection{Trees and rules}
@@ -72,8 +72,44 @@ When running the C5.0 algorithm on the car evalutation dateset we found that the
     \caption{Rules}
     \label{fig:rules}
   \end{figure}
-  
 
+  \paragraph{Rules}
+  When generating rules from the tree model we get 11 rules or 11 paths through the tree. Some rule are not very sensible like rule number 10 which states that if the car acceptability is unacceptable then the price range is very high. Some rules are more logical like rule 5 that states that if it has medium safety, a small boot size and its in acceptable condition it will be be priced in a low price range.
+  Rule 9 also states that if the maintenance costs are medium, it has a big boot and its in acceptable condition it will be priced very high which is very true when it comes to big station wagons or SUV's. This means that some of the rules have logic that someone with domain knowledge can recognize.
+
+  \subsection{Testing the model}
+  When I started the building of the model i split the data set. A thousand rows of data was reserved for training the data and 728 rows was reserved for testing. When using the predict function C5.0 on the test data set we get the results displayed in figure \ref{fig:predict}.
+
+  \begin{figure}[h]
+    \centering 
+    \includegraphics[width=0.8\textwidth]
+    {images/predict}
+    \caption{Prediction on training set with the rule model}
+    \label{fig:predict}
+  \end{figure}
+
+  As you can see in figure \ref{fig:predict} the number of cars classified in the v-high price range, way exceed the number of cars that exceed the medium price range. This is expected when you look at the rules of the model. Three ways thorough the tree gives a classification of v-high, but only one classifies it as medium.
+
+  Figure \ref{fig:act} shows the actual distribution.
+
+  \begin{figure}[h]
+    \centering 
+    \includegraphics[width=0.8\textwidth]
+    {images/actual}
+    \caption{Actual distribution of test data}
+    \label{fig:act}
+  \end{figure}
+
+\subsection{Winnowing, boosting and pruning}
+\paragraph{Boosting}
+Boosting is an algorithm where multiple model are created. When classifying, all of the models vote for which classification the row will be. I tried to enable boosting for my data set, but it showed up with an error that said that the last classifier was not accurate enough.
+
+\paragraph{Winnowing}
+Winnowing is an algorithm that exclude attributes that does not provide any value able information. When i applied the C5.0 algorithm with winnowing enabled it winnowed three attribute, the number of doors, the number of persons that can fit in the car and the boot size. This had a negative effect on the model and the error rate increased with 4.3 percent.
+
+
+\section{Result}
+In this project i hopes to achieve much greater accuracy than what I did. I have tried the C5.0 algorithm with several configurations and additional algorithms. The best result I was able to achieve was 58 percent error rate. 58 percent in this domain is not satisfactory for the use cases of this model. I have worked systematically Troy try to improve it without no real breakthrough. In order to improve my model I will try other algorithms like XgBoost. I will also try other data set about cars in order to get more predictors to work with. 
 \clearpage
 \begin{thebibliography}{9}
 \bibitem{mml-interference} 
@@ -96,6 +132,10 @@ peter J Tan, David L Towe, 2003
 \bibitem{dataset-usage}
   Marko Bohanec, Vladislav Rajkovic
   \textit{Knowledge acquisition and explanation for multi-attribute decision making}
+\bibitem{guide}
+  Rulequest research
+  \textit{C5.0: An Informal Tutorial}
+
 
  
 \end{thebibliography}
