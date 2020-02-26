@@ -4,18 +4,17 @@ library(caret)
 cardata <- readRDS(file = "data/cardata.Rds")
 
 cardata$maint <- unclass(cardata$maint)
-cardata$buying <- unclass(cardata$buying)
 cardata$doors <- unclass(cardata$doors)
 cardata$persons <- unclass(cardata$persons)
 cardata$lug_boot <- unclass(cardata$lug_boot)
 cardata$safety <- unclass(cardata$safety)
 cardata$accept <- unclass(cardata$accept)
 
-correlations <- cor(cardata)
+correlations <- cor(cardata[c("doors", "persons", "lug_boot", "accept", "safety", "maint")])
 dim(correlations)
 
 # Visualization
-correlations[1:7, 1:7]
+head(correlations)
 
 corrplot(correlations, order = "hclust")
 

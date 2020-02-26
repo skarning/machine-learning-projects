@@ -42,6 +42,43 @@ The data set was used as an example for displaying multi attribute decision-maki
 \paragraph{Generation}
 According to Bohanec the Car evaluation data set was created from a hierarchical decision model. This model was created for the demonstration of a decision making software called DEX \cite{dataset}.
 
+\section{Data Pre-processing}
+\subsection{Feature Extraction}
+Data reduction is about removing predictors to get a smaller and simpler data-set to work with. I decided to use PCA for feature exctraction in order to simplify my data set and still capture much of the variance in the data-set. The way PCA works is that it finds predictors that are highly correlated and tries to create linear combinations of them. These linear combinations capture all of the needed information.
+
+  \begin{figure}[h]
+    \centering 
+    \includegraphics[width=0.6\textwidth]
+    {images/PCA-PLOT}
+    \caption{PCA plot}
+    \label{fig:pca}
+  \end{figure}
+
+  As said in the book \cite{modeling-book} having predictors that are not correlated can be advantegous. As you can se on the PCA plot there are not any clusters that sperates the classes.
+When trying to train the model using PCA, I get an error rate of 65\%. This is roughly 10\% worse than without PCA. The result might be because the pca has generated componenents that does not capture the relevant data \cite{modeling-book}
+
+
+\subsection{Between Predictor Correlation}
+As i talked about in de Feature Extraction subsection, to high of a correlation is always good for the model accuracy. To remove predictors that are highly correlated we can also use the following algorithm \cite{modeling-book}:
+\begin{itemize}
+\item Set a treshold
+\item Calculate the correlation matrix of the predictors.
+\item Find the highest correlation
+\item Determine the average correlation between A and all the other variables as well as B.
+\item Remove the predictors with the highest average correlation.
+\item Repeat this until no predictor correlations are above the treshold you hava set.
+\end{itemize}
+
+  \begin{figure}[h]
+    \centering 
+    \includegraphics[width=0.6\textwidth]
+    {images/correlation}
+    \caption{Between predictor correlation}
+    \label{fig:correlation}
+  \end{figure}
+
+In the car evaluation data set there were no predictors that had a correlation high enough to remove it. This algorithm wil not yield any result for the model.
+
 \section{Classification}
 \subsection{C5.0}
 I decided to use C5.0 for the classification. It is free and easy use. C5.0 is an algorithm to produce decision trees for classification purposes. For configuring the data and running the algorithm I used R. In R you can use the C5.0 package to generate basic tree-models and rule-based models. In this chapter I will present my findings when using this algorithm on the car evaluation data set. To help me get started with R and the C5.0 algorithm I used this guide \cite{guide}.
@@ -107,9 +144,30 @@ Boosting is an algorithm where multiple model are created. When classifying, all
 \paragraph{Winnowing}
 Winnowing is an algorithm that exclude attributes that does not provide any value able information. When i applied the C5.0 algorithm with winnowing enabled it winnowed three attribute, the number of doors, the number of persons that can fit in the car and the boot size. This had a negative effect on the model and the error rate increased with 4.3 percent.
 
+\section{Scikit Learn and dection trees}
+\subsection{Trees}
+Tree-based models consists of one or more nested if-then statements for the predictors that partition the data.A rule is a set of if-then conditions that have been collapsed into independent conditions.A rule is defined by the tree. A rule is defined as a distinct path through a tree. For the tree, a new sample can only travel down a single path through the tree defined by these rules.Let’s consider an example provided in the book, Applied Predictive Modelling, Chapter 8:If Predictor Ais bigger or equals1.7 then     If predictor B is smaller or equals 202.1 then outcome =1.3. Else outcome =5.6Else outcome = 2.5.
 
-\section{Result}
-In this project i hopes to achieve much greater accuracy than what I did. I have tried the C5.0 algorithm with several configurations and additional algorithms. The best result I was able to achieve was 58 percent error rate. 58 percent in this domain is not satisfactory for the use cases of this model. I have worked systematically Troy try to improve it without no real breakthrough. In order to improve my model I will try other algorithms like XgBoost. I will also try other data set about cars in order to get more predictors to work with. 
+Trees are more sensitive to slight change of parameters. In such cases rules perform rigidly then trees. Rules have there own limitations representing many categories which can be done most effectively by trees.  A  2.5  B  5.6  1.3
+Our data set is taken from http://archive.ics.uci.edu/ml/datasets/Car+Evaluation.The dataset is about predicting the model of car (acceptable, unacceptable, very god, good are the class which represents the model). On the basis of features like comfort, buying price, maintenance price, number of doors, number of passengers, luggage boot size, the class of the car is predicted.We model this data set using R and python separately. Here we will discuss aboutthe finding of dataset by using python and decision tree algorithm for classifying the class.In original data set column name was missing. We assign name to each column. During Exploratory Data Analysis, we find that the number of doors were assigned as 5, which is quite unpractical. And, number of People were mentionedas ‘5more’. It was replaced by an integer value of 6. We used Decision Tree Classifier, which is a function of Scikit learn library.
+
+\subsection{Testing}
+We split the data set into training and testing set in the proportion of 70\% and 30\% respectively. For the object type attributes of column, dummies variable wasused before fitting the data into Decision tree classifier.
+
+\subsection{Result}
+In the figure below you can se the achieved result.
+
+
+  \begin{figure}[h]
+    \centering 
+    \includegraphics[width=0.8\textwidth]
+    {images/confusion}
+    \caption{Confusion matrix}
+    \label{conf}
+  \end{figure}
+
+\section{Conclusion}
+In this project i hoped to achieve much greater accuracy than what I did. I have tried the C5.0 algorithm with several configurations and additional algorithms. The best result I was able to achieve was 58 percent error rate. 58 percent in this domain is not satisfactory for the use cases of this model. I have worked systematically Troy try to improve it without no real breakthrough. In order to improve my model I will try other algorithms like XgBoost. I will also try other data set about cars in order to get more predictors to work with. 
 \clearpage
 \begin{thebibliography}{9}
 \bibitem{mml-interference} 
@@ -132,9 +190,14 @@ peter J Tan, David L Towe, 2003
 \bibitem{dataset-usage}
   Marko Bohanec, Vladislav Rajkovic
   \textit{Knowledge acquisition and explanation for multi-attribute decision making}
+
 \bibitem{guide}
   Rulequest research
   \textit{C5.0: An Informal Tutorial}
+
+\bibitem{modeling-book}
+  Max Khun
+  \textit{Applied Predictive Modeling}
 
 
  
