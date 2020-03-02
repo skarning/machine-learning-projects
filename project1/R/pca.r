@@ -5,6 +5,8 @@ cardata <- readRDS(file = "data/cardata.Rds")
 vars <- c("PC1", "PC2", "PC3", "PC4", "PC5")
 
 # numerize categories
+
+head(cardata)
 cardata$maint <- unclass(cardata$maint)
 
 cardata$doors <- unclass(cardata$doors)
@@ -18,7 +20,7 @@ set.seed(500)   #sets seed to 500 for recreation
 rows <- sample(nrow(cardata))
 r_cardata <- cardata[rows, ]
 r_cardata <- cardata[c("doors", "maint", "lug_boot", "persons", "accept", "safety")]
-head(r_cardata)
+
 
 
 # applies pca

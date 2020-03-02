@@ -1,0 +1,33 @@
+\documentclass[a4paper, 12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{listings}
+\usepackage{graphicx}
+\usepackage{natbib}
+
+\title{Classifying car price ranges with neural networks}
+\author{Sivert M. Skarning}
+\date{Mai 2019}
+
+\begin{document}
+\maketitle
+\clearpage
+\tableofcontents
+\clearpage
+
+\section{Introduction}
+This project will try to find data pre-processing methods and a neural network that best predicts the buying price of a car, based on the car evaluation dataset.
+It will also compare performance and anccuracy between decision trees and neural networks on this dataset.
+\subsection{Related work}
+There are numerous articles that have studied the performance of different modeling techniques with respect to the car evaluation dataset. The article by Sameer Singh\cite{singh2005modeling} discusses the performance of varying training set sizes for different classification methods for the car evaluation sets. Sameer used artificial neural networks, K-nearest neighbour, decision trees and support vector machines in order to classify the acceptability of each car.
+
+
+An article\cite{perf} also explored the performance of data mining classification methods. Here the authors also focus on the pre-processing of the data. They discuss concepts like data-cleaning, data-transformation and splitting of the data-set.
+
+\clearpage
+\bibliographystyle{plain}
+\bibliography{ref}
+\end{document}
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
