@@ -51,6 +51,7 @@ In figure \ref{fig:one-hot-ex} you can see how one hot encoding encodes the lug\
     \label{fig:one-hot-ex}
   \end{figure}
 \subsection{Artificial Neural Networks(ANN)}
+\subsubsection{Opening remarks}  
 In this project i decided to use neuralnet in r for the neural network prediction. This is a well know package and it has good resources.
 
  \begin{figure}[h]
@@ -61,7 +62,15 @@ In this project i decided to use neuralnet in r for the neural network predictio
     \label{fig:nn1}
   \end{figure}
 
-  
+\subsubsection{Training data}
+After cleaning the dataset and applying one-hot encoding I fit the model to the training data. The calculation of the accuracy of the model was done with the with the result matrix and the original data. This showed an error rate of 64\% wich is worse than the error rate of the decition tree.
+ \begin{figure}[h]
+    \centering 
+    \includegraphics[width=0.8\textwidth]
+    {images/nn1}
+    \caption{Artificial Neural Network}
+    \label{fig:nn1}
+  \end{figure}
 \clearpage
 \bibliographystyle{plain}
 \bibliography{ref}

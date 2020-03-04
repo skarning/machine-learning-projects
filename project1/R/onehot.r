@@ -27,6 +27,8 @@ one_hot <- dummyVars("~ .", data=test)
 one_hot_mat <- predict(one_hot, newdata = r_cardata)
 one_hot_test <- data.frame(one_hot_mat)
 
+head(one_hot_test)
+
 
 # Find the number of missing values
 missing_values <- sum(is.na(train))
@@ -37,10 +39,17 @@ nn=neuralnet("buying.high + buying.low + buying.med + buying.vhigh ~ .", data=on
 
 plot(nn)
 
-nn$result.matrix
+result.mat <- nn$result.matrix
 
+result <- compute(nn, one_hot_data)
+ex_res <- result$net.result
 
-predict = compute(nn, one_hot_test)
+ex_res
+one_hot_data
 
+# Calculate the accuracy
+original_values <- max.col(one_hot_data[,1:4])
 
+res_ex_2 <- max.col(ex_res)
 
+mean(res_ex_2 == original_values)
