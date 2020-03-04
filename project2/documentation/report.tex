@@ -6,7 +6,7 @@
 
 \title{Classifying car price ranges with neural networks}
 \author{Sivert M. Skarning}
-\date{Mai 2019}
+\date{March 2020}
 
 \begin{document}
 \maketitle
@@ -23,6 +23,45 @@ There are numerous articles that have studied the performance of different model
 
 An article\cite{perf} also explored the performance of data mining classification methods. Here the authors also focus on the pre-processing of the data. They discuss concepts like data-cleaning, data-transformation and splitting of the data-set.
 
+\section{Method}
+
+\subsection{Data quality}
+In order to ensure data quality it is necessary to assess the dataset. In this report we will clean the dataset by removing duplicates and fill missing values. We do this to give the neural network algorithms quality data to analyze\cite{quality}.
+\subsubsection{missing values}
+After running an r script that counts missing values, we foundt out that there are no missing values. This will save us from doing interpolation or fill with mean method to fill missing values.
+\subsubsection{duplicate values}
+Duplicate values might give the modeling algorithm an idea that the date counts more than other data. This migh contribute to over-fitting. After running a script that counted duplicates in r, we found out that the dataset did not have any duplicate data.
+\subsection{Encoding}
+There are three main encodings when working with classification of categorical data\cite{encoding}.
+\begin{itemize}
+     \item Integer encoding
+     \item One Hot encoding
+     \item Learned embedding encoding
+\end{itemize}
+
+In this project i will explore the performance of One Hot encoding on the car evaluation data set. This encoding method is used when the machine learning algorithm might not be able to understand the relationship between the data. Integer encoding on this dataset gave poor perfomance.
+
+In figure \ref{fig:one-hot-ex} you can see how one hot encoding encodes the lug\_boot size category into numerical values by splitting the categories into seperate columns of data.
+
+  \begin{figure}[h]
+    \centering 
+    \includegraphics[width=0.6\textwidth]
+    {images/one-hot-encoding-example}
+    \caption{Excerpt of One Hot Encoding on car evaluation dataset}
+    \label{fig:one-hot-ex}
+  \end{figure}
+\subsection{Artificial Neural Networks(ANN)}
+In this project i decided to use neuralnet in r for the neural network prediction. This is a well know package and it has good resources.
+
+ \begin{figure}[h]
+    \centering 
+    \includegraphics[width=0.8\textwidth]
+    {images/nn1}
+    \caption{Artificial Neural Network}
+    \label{fig:nn1}
+  \end{figure}
+
+  
 \clearpage
 \bibliographystyle{plain}
 \bibliography{ref}
