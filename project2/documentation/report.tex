@@ -67,10 +67,13 @@ After cleaning the dataset and applying one-hot encoding I fit the model to the 
  \begin{figure}[h]
     \centering 
     \includegraphics[width=0.8\textwidth]
-    {images/nn1}
-    \caption{Artificial Neural Network}
+    {images/nn_res}
+    \caption{ANN results}
     \label{fig:nn1}
   \end{figure}
+I decided to split the dataset into to different sets. One training set and one testing set. This prediction was done on the training set. This is not accurate of how the model will perform in real life since the model can be highly tuned for this set (over-fitted).
+\subsubsection{Test data}
+The prediction on the test data will display the accuracy of the model more realistic. A huge gap betweeen accuracy in test data-set and training data-set will be signs of over-fitting.  
 \clearpage
 \bibliographystyle{plain}
 \bibliography{ref}
