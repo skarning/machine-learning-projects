@@ -73,7 +73,14 @@ After cleaning the dataset and applying one-hot encoding I fit the model to the 
   \end{figure}
 I decided to split the dataset into to different sets. One training set and one testing set. This prediction was done on the training set. This is not accurate of how the model will perform in real life since the model can be highly tuned for this set (over-fitted).
 \subsubsection{Test data}
-The prediction on the test data will display the accuracy of the model more realistic. A huge gap betweeen accuracy in test data-set and training data-set will be signs of over-fitting.  
+The prediction on the test data will display the accuracy of the model more realistic. A huge gap betweeen accuracy in test data-set and training data-set will be signs of over-fitting.
+
+When running the ANN on the validation data we got an almost identical accuracy. On the training set we got 35.57\% accuracy, when running the model on the validation data we got a 36.67\%. The fact that the two results are so simulare to eachother is a good indicator that the model is not over-fitted.
+
+\subsubsection{K-fold cross-validation}
+Even tough the model is not over-fitting i decided to try k-fold cross-validation in order to find the accuracy of the model. Cross-validation is a method for testing the model that used all of the data for testing and all of the data for validation. The way it works is that it splits the dataset into k different parts. It then uses k - 1 parts for training and the last part for validation. Then it repeats it k times in such a wau that all the k-parts has been used in both testing and validation. Then it takes the average accuracy of these models.
+
+In my project I used 10 fold cross validation. Cross validation 
 \clearpage
 \bibliographystyle{plain}
 \bibliography{ref}
