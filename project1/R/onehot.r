@@ -95,3 +95,4 @@ for (i in 1:k) {
 }
 
 mean(outs)
+
