@@ -81,16 +81,21 @@ When running the ANN on the validation data we got an almost identical accuracy.
 Even tough the model is not over-fitting i decided to try k-fold cross-validation in order to find the accuracy of the model. Cross-validation is a method for testing the model that used all of the data for testing and all of the data for validation. The way it works is that it splits the dataset into k different parts. It then uses k - 1 parts for training and the last part for validation. Then it repeats it k times in such a way that all the k-parts has been used in both testing and validation. Then it takes the average accuracy of these models.
 
 In my project I used 10 fold cross validation. Cross validation gave a 31.6\% accuracy wich is worse than the split testing method. This could be a sign that the model is overfitted.
+\subsection{Learning curve}
+A learning curve is a great tool for debugging the model. The learning curve gives you vital information on if the model is learning and if it is the fit is good.
 
-\subsubsection{Overfitting}
+\begin{figure}[h]
+  \centering 
+  \includegraphics[width=1\textwidth]
+  {images/learning_curve}
+  \caption{Learning Curve of neural network}
+  \label{fig:lc}
+\end{figure}
 
-\subsubsection{Learning curve}
+As you can see in figure \ref{fig:lc} the model is learning. However the training process could benefit from more training examples in order to close the gap between the training accuracy and the validation accuracy. In figure \ref{fig:lc} the x-axis shows number of training examples and y-axis shows the accuracy of the model.
 
 \subsection{Optimization}
 Hyperparameter optimization is trying to find the most optimal parameters for getting the most accurate neural network. There are many ways at doing hyperparameter optimization. The easiest way is actually trial and error. The problem is that this takes a long time, and it is easy to get lost with no structure.
-\subsubsection{Bayesian optimization}
-\subsection{Keras optimization}
-\subsection{Gradient decent}
 
 \clearpage
 \bibliographystyle{plain}
