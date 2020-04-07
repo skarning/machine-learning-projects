@@ -25,9 +25,9 @@ predictors <- setdiff(names(cardata), prediction)
 
 # Hyperparameters
 hyperParameters <- list(
-    hidden=list(c(10,10,10), c(100,100)),
+    hidden=list(c(10, 10), c(5, 5, 5), c(10, 10, 10), c(100, 100)),
     input_dropout_ratio=c(0, 0.5),
-    rate_annealing=c(0.01,0.04)
+    rate=c(0.01, 0.05)
 )
 
 grid <- h2o.grid(

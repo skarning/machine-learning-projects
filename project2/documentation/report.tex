@@ -5,8 +5,8 @@
 \usepackage{natbib}
 
 \title{Classifying car price ranges with neural networks}
-\author{Sivert M. Skarning}
-\date{March 2020}
+\author{Sivert Marius Skarning}
+\date{April 2020}
 
 \begin{document}
 \maketitle
@@ -105,9 +105,28 @@ Hyperparameter tuning is trying to find the most optimal parameters for getting 
 \paragraph{grid search}
 In grid search we will define what hyperparameters we would like to tune. Then we would construct ranges that the hyperparameters have to be in. Then grid search will try alle the combinations of these parameters and find the best value.
 
+For grid search I created a grid with three values.
+\begin{itemize}
+\item Number of hidden layers and neurons in each layer
+\item Input\_dropout\_ratio
+\item Learning rate
+\end{itemize}
 
+\begin{figure}[h]
+  \centering 
+  \includegraphics[width=1\textwidth]
+  {images/grid-results}
+  \caption{Results of grid search}
+  \label{fig:grids}
+\end{figure}
 
-\paragraph{random search}
+In figure \ref{fig:grids} you can se the result of the grid search sorted on what goves the smallest logloss on the set. The figure shows that a network with 2 hidden layers with 10 neurons in each, a input dropout ration of 0.5 and a learning rate of 0.01 gives the best result. When testing the model I get a error rate of 61.3 percent. This is a good improvement from the 62.4 percent i get when i tune the model my self.
+
+\subsubsection{Optimization}
+\paragraph{gradient decent}
+\paragraph{RMS Prop Optimization}
+\paragraph{Adam}
+
 \clearpage
 \bibliographystyle{plain}
 \bibliography{ref}
