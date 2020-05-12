@@ -33,7 +33,7 @@ encodedFull <- oneHotEncode(randomCardata)
 
 # Neuralnet prediction
 # Neural network fitting from: https://www.datacamp.com/community/tutorials/neural-network-models-r
-neuralNetModel <- neuralnet("buying.high + buying.low + buying.med + buying.vhigh ~ .", data=encodedTrain, hidden=c(5,3), linear.output = FALSE)
+neuralNetModel <- neuralnet("buying.high + buying.low + buying.med + buying.vhigh ~ .", data=encodedTrain, hidden=c(400, 400), linear.output = FALSE)
 result.mat <- neuralNetModel$result.matrix
 
 accuracy <- function(encodedData, res, from, to) {
@@ -54,7 +54,8 @@ crossValidate <- function(k, partition, encodedData, from, to) {
     for (i in 1:k) {
         split <- sample(1:nrow(encodedData), round(partition*nrow(encodedData)))
         trainPartition <- encodedData[split, ]
-        testPartition <- encodedData[-split, ]                                         #hidden is the number of hidden layers for specifiyin node use vector c(5,2) ex.
+        testPartition <- encodedData[-split, ]
+# Hidden is the number of hidden layers for specifiyin node use vector c(5,2) ex.
         currentModel <- neuralnet("buying.high + buying.low + buying.med + buying.vhigh ~ .", data=trainPartition, hidden=5, act.fct = "tanh", linear.output = FALSE)
 
         dataPrediction <- predictionTable(currentModel, testPartition)

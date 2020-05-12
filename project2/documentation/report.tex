@@ -13,25 +13,26 @@
 \clearpage
 \tableofcontents
 \clearpage
+\pagenumbering{arabic}
 
-\section{introduction}
+\section{Introduction}
 This project will try to find data pre-processing methods and a neural network that best predicts the buying price of a car, based on the car evaluation dataset.
 It will also compare performance and anccuracy between decision trees and neural networks on this dataset.
-\subsection{related work}
-There are numerous articles that have studied the performance of different modeling techniques with respect to the car evaluation dataset. The article by Sameer Singh\cite{singh2005modeling} discusses the performance of varying training set sizes for different classification methods for the car evaluation sets. Sameer used artificial neural networks, K-nearest neighbour, decision trees and support vector machines in order to classify the acceptability of each car.
+\subsection{Literature review}
+There are numerous articles that have studied the performance of different modeling techniques with respect to the car evaluation dataset. The article by Sameer Singh\cite{singh2005modeling} discusses the performance of varying training set sizes for different classification methods for the car evaluation sets. Sameer used neural networks, K-nearest neighbour, decision trees and support vector machines in order to classify the acceptability of each car.
 
 
 An article\cite{perf} also explored the performance of data mining classification methods. Here the authors also focus on the pre-processing of the data. They discuss concepts like data-cleaning, data-transformation and splitting of the data-set.
 
-\section{method}
+\section{Method}
 
-\subsection{data quality}
+\subsection{Data quality}
 In order to ensure data quality it is necessary to assess the dataset. In this report we will clean the dataset by removing duplicates and fill missing values. We do this to give the neural network algorithms quality data to analyze\cite{quality}.
-\subsubsection{missing values}
+\subsubsection{Missing values}
 After running an r script that counts missing values, we foundt out that there are no missing values. This will save us from doing interpolation or fill with mean method to fill missing values.
-\subsubsection{duplicate values}
+\subsubsection{Duplicate values}
 Duplicate values might give the modeling algorithm an idea that the date counts more than other data. This migh contribute to over-fitting. After running a script that counted duplicates in r, we found out that the dataset did not have any duplicate data.
-\subsection{encoding}
+\subsection{Encoding}
 There are three main encodings when working with classification of categorical data\cite{encoding}.
 \begin{itemize}
      \item Integer encoding
@@ -45,34 +46,34 @@ In figure \ref{fig:one-hot-ex} you can see how one hot encoding encodes the lug\
 
   \begin{figure}[h]
     \centering 
-    \includegraphics[width=0.6\textwidth]
+    \includegraphics[width=0.7\textwidth]
     {images/one-hot-encoding-example}
     \caption{Excerpt of One Hot Encoding on car evaluation dataset}
     \label{fig:one-hot-ex}
   \end{figure}
-\subsection{neural networks in neuralnet}
-\subsubsection{opening remarks}  
+\subsection{Neural networks in neuralnet}
+\subsubsection{Opening remarks}  
 In this project i decided to use neuralnet in r for the neural network prediction. This is a well know package and it has good resources.
 
  \begin{figure}[h]
     \centering 
-    \includegraphics[width=0.8\textwidth]
+    \includegraphics[width=0.7\textwidth]
     {images/nn1}
-    \caption{Artificial Neural Network}
+    \caption{Neural Network}
     \label{fig:nn1}
   \end{figure}
 
-\subsubsection{training data}
+\subsubsection{Training data}
 After cleaning the dataset and applying one-hot encoding I fit the model to the training data. The calculation of the accuracy of the model was done with the with the result matrix and the original data. This showed an error rate of 64\% wich is worse than the error rate of the decition tree.
  \begin{figure}[h]
     \centering 
-    \includegraphics[width=0.8\textwidth]
+    \includegraphics[width=0.7\textwidth]
     {images/nn_res}
     \caption{ANN results}
     \label{fig:nn1}
   \end{figure}
 I decided to split the dataset into to different sets. One training set and one testing set. This prediction was done on the training set. This is not accurate of how the model will perform in real life since the model can be highly tuned for this set (over-fitted).
-\subsubsection{test data}
+\subsubsection{Test data}
 The prediction on the test data will display the accuracy of the model more realistic. A huge gap betweeen accuracy in test data-set and training data-set will be signs of over-fitting.
 
 When running the ANN on the validation data we got an almost identical accuracy. On the training set we got 35.57\% accuracy, when running the model on the validation data we got a 36.67\%. The fact that the two results are so simulare to eachother is a good indicator that the model is not over-fitted.
@@ -81,12 +82,12 @@ When running the ANN on the validation data we got an almost identical accuracy.
 Even tough the model is not over-fitting i decided to try k-fold cross-validation in order to find the accuracy of the model. Cross-validation is a method for testing the model that used all of the data for testing and all of the data for validation. The way it works is that it splits the dataset into k different parts. It then uses k - 1 parts for training and the last part for validation. Then it repeats it k times in such a way that all the k-parts has been used in both testing and validation. Then it takes the average accuracy of these models.
 
 In my project I used 10 fold cross validation. Cross validation gave a 31.6\% accuracy wich is worse than the split testing method. This could be a sign that the model is overfitted.
-\subsubsection{learning curve}
+\subsubsection{Learning curve}
 A learning curve is a great tool for debugging the model. The learning curve gives you vital information on if the model is learning and if it is the fit is good.
 
 \begin{figure}[h]
   \centering 
-  \includegraphics[width=1\textwidth]
+  \includegraphics[width=0.7\textwidth]
   {images/learning_curve}
   \caption{Learning Curve of neural network}
   \label{fig:lc}
@@ -94,15 +95,15 @@ A learning curve is a great tool for debugging the model. The learning curve giv
 
 As you can see in figure \ref{fig:lc} the model is learning. However the training process could benefit from more training examples in order to close the gap between the training accuracy and the validation accuracy. In figure \ref{fig:lc} the x-axis shows number of training examples and y-axis shows the accuracy of the model.
 
-\subsection{neuralnetworks in h2o}
+\subsection{Neuralnetworks in h2o}
 I have been using the neuralnet package for my predictions up to this point. Neuralnet is an easy to use package. It is great for getting into machine learning and for creating basic learning models with. The problem with neuralnet is its lack of parameter tuning options. Customizing the layers and activation functions is limited.
 
 From this point and on I will use a more advanced machine learning package called h2o. This has more options for tuning and more references.
 
-\subsubsection{tuning}
+\subsubsection{Tuning}
 Hyperparameter tuning is trying to find the most optimal parameters for getting the most accurate neural network. There are many ways at doing hyperparameter tuning. The easiest way is actually trial and error. The problem is that this takes a long time, and it is easy to get lost with no structure.
 
-\paragraph{grid search}
+\paragraph{Grid search}
 In grid search we will define what hyperparameters we would like to tune. Then we would construct ranges that the hyperparameters have to be in. Then grid search will try alle the combinations of these parameters and find the best value.
 
 For grid search I created a grid with three values.
@@ -114,7 +115,7 @@ For grid search I created a grid with three values.
 
 \begin{figure}[h]
   \centering 
-  \includegraphics[width=1\textwidth]
+  \includegraphics[width=0.7\textwidth]
   {images/grid-results}
   \caption{Results of grid search}
   \label{fig:grids}
@@ -123,9 +124,24 @@ For grid search I created a grid with three values.
 In figure \ref{fig:grids} you can se the result of the grid search sorted on what goves the smallest logloss on the set. The figure shows that a network with 2 hidden layers with 10 neurons in each, a input dropout ration of 0.5 and a learning rate of 0.01 gives the best result. When testing the model I get a error rate of 61.3 percent. This is a good improvement from the 62.4 percent i get when i tune the model my self.
 
 \subsubsection{Optimization}
-\paragraph{gradient decent}
-\paragraph{RMS Prop Optimization}
-\paragraph{Adam}
+Optimization of the neural network is a way to get better predictions. The concept is about minimizing the choosen error function.
+Gradient decent is a method where you find the gradients of the loss function and takes steps where the gradient decreaseas. If the gradient is steep it takes long steps(high step value), if the gradient is less steep it takes a smaller step. In this way it will converge towards the most optimum values for the weights of the neural network. There are many different types of gradient decent algorithms.
+
+
+In the CRAN neuralnet package an optimization algorithm called resilliant backrpegation(Rprop) is used. This is a very fast algorithm, however it is complex to implement. The H2o packages uses stochastic gradien descent(SGD). This algorithm takes on single dataset each epoch, and adjusts the weights. The example it chooses is random, and that is why we it is called stochastic.
+
+
+There are not possible to switch optimization algorithms on H2O or neuralnet package. However I can compare how the two models performed. The comparison of the two algorithms will never be accurate because they are run on two different packages. When trying different parameters like the number of epochs, neruons, hidden layers etc, I got the results in figure.
+
+\begin{figure}[h]
+  \centering 
+  \includegraphics[width=0.7\textwidth]
+  {images/optimization-results}
+  \caption{Results of optimization}
+  \label{fig:optimization}
+\end{figure}
+
+\subsubsection{Interpretation}
 
 \clearpage
 \bibliographystyle{plain}
