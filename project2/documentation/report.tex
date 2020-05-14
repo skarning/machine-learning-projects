@@ -16,10 +16,10 @@
 \pagenumbering{arabic}
 
 \section{Introduction}
-This project will try to find data pre-processing methods and a neural network that best predicts the buying price of a car, based on the car evaluation dataset.
-It will also compare performance and anccuracy between decision trees and neural networks on this dataset.
+This project will try to find data pre-processing methods and a neural network that best predicts the buying price of a car, based on the car evaluation data set.
+It will also compare performance and accuracy between decision trees and neural networks on this data set.
 \subsection{Literature review}
-There are numerous articles that have studied the performance of different modeling techniques with respect to the car evaluation dataset. The article by Sameer Singh\cite{singh2005modeling} discusses the performance of varying training set sizes for different classification methods for the car evaluation sets. Sameer used neural networks, K-nearest neighbour, decision trees and support vector machines in order to classify the acceptability of each car.
+There are numerous articles that have studied the performance of different modeling techniques with respect to the car evaluation data set. The article by Sameer Singh\cite{singh2005modeling} discusses the performance of varying training set sizes for different classification methods for the car evaluation sets. Sameer used neural networks, K-nearest neighbor, decision trees and support vector machines in order to classify the acceptability of each car.
 
 
 An article\cite{perf} also explored the performance of data mining classification methods. Here the authors also focus on the pre-processing of the data. They discuss concepts like data-cleaning, data-transformation and splitting of the data-set.
@@ -27,28 +27,28 @@ An article\cite{perf} also explored the performance of data mining classificatio
 \section{Method}
 
 \subsection{Data quality}
-In order to ensure data quality it is necessary to assess the dataset. In this report we will clean the dataset by removing duplicates and fill missing values. We do this to give the neural network algorithms quality data to analyze\cite{quality}.
+In order to ensure data quality it is necessary to assess the data set. In this report we will clean the data set by removing duplicates and fill missing values. We do this to give the neural network algorithms quality data to analyze\cite{quality}.
 \subsubsection{Missing values}
-After running an r script that counts missing values, we foundt out that there are no missing values. This will save us from doing interpolation or fill with mean method to fill missing values.
+After running an r script that counts missing values, we found out that there are no missing values. This will save us from doing interpolation or fill with mean method to fill missing values.
 \subsubsection{Duplicate values}
-Duplicate values might give the modeling algorithm an idea that the date counts more than other data. This migh contribute to over-fitting. After running a script that counted duplicates in r, we found out that the dataset did not have any duplicate data.
+Duplicate values might give the modeling algorithm an idea that the date counts more than other data. This might contribute to over-fitting. After running a script that counted duplicates in r, we found out that the data set did not have any duplicate data.
 \subsection{Encoding}
-There are three main encodings when working with classification of categorical data\cite{encoding}.
+There are three main encoding when working with classification of categorical data\cite{encoding}.
 \begin{itemize}
      \item Integer encoding
      \item One Hot encoding
      \item Learned embedding encoding
 \end{itemize}
 
-In this project i will explore the performance of One Hot encoding on the car evaluation data set. This encoding method is used when the machine learning algorithm might not be able to understand the relationship between the data. Integer encoding on this dataset gave poor perfomance.
+In this project i will explore the performance of One Hot encoding on the car evaluation data set. This encoding method is used when the machine learning algorithm might not be able to understand the relationship between the data. Integer encoding on this data set gave poor performance.
 
-In figure \ref{fig:one-hot-ex} you can see how one hot encoding encodes the lug\_boot size category into numerical values by splitting the categories into seperate columns of data.
+In figure \ref{fig:one-hot-ex} you can see how one hot encoding encodes the lug\_boot size category into numerical values by splitting the categories into separate columns of data.
 
   \begin{figure}[h]
     \centering 
     \includegraphics[width=0.7\textwidth]
     {images/one-hot-encoding-example}
-    \caption{Excerpt of One Hot Encoding on car evaluation dataset}
+    \caption{Excerpt of One Hot Encoding on car evaluation data set}
     \label{fig:one-hot-ex}
   \end{figure}
 \subsection{Neural networks in neuralnet}
@@ -64,7 +64,7 @@ In this project i decided to use neuralnet in r for the neural network predictio
   \end{figure}
 
 \subsubsection{Training data}
-After cleaning the dataset and applying one-hot encoding I fit the model to the training data. The calculation of the accuracy of the model was done with the with the result matrix and the original data. This showed an error rate of 64\% wich is worse than the error rate of the decition tree.
+After cleaning the data set and applying one-hot encoding I fit the model to the training data. The calculation of the accuracy of the model was done with the with the result matrix and the original data. This showed an error rate of 64\% which is worse than the error rate of the decision tree.
  \begin{figure}[h]
     \centering 
     \includegraphics[width=0.7\textwidth]
@@ -72,16 +72,16 @@ After cleaning the dataset and applying one-hot encoding I fit the model to the 
     \caption{ANN results}
     \label{fig:nn1}
   \end{figure}
-I decided to split the dataset into to different sets. One training set and one testing set. This prediction was done on the training set. This is not accurate of how the model will perform in real life since the model can be highly tuned for this set (over-fitted).
+I decided to split the data set into to different sets. One training set and one testing set. This prediction was done on the training set. This is not accurate of how the model will perform in real life since the model can be highly tuned for this set (over-fitted).
 \subsubsection{Test data}
-The prediction on the test data will display the accuracy of the model more realistic. A huge gap betweeen accuracy in test data-set and training data-set will be signs of over-fitting.
+The prediction on the test data will display the accuracy of the model more realistic. A huge gap between accuracy in test data-set and training data-set will be signs of over-fitting.
 
-When running the ANN on the validation data we got an almost identical accuracy. On the training set we got 35.57\% accuracy, when running the model on the validation data we got a 36.67\%. The fact that the two results are so simulare to eachother is a good indicator that the model is not over-fitted.
+When running the ANN on the validation data we got an almost identical accuracy. On the training set we got 35.57\% accuracy, when running the model on the validation data we got a 36.67\%. The fact that the two results are so simular to each other is a good indicator that the model is not over-fitted.
 
 \subsubsection{K-fold cross-validation}
-Even tough the model is not over-fitting i decided to try k-fold cross-validation in order to find the accuracy of the model. Cross-validation is a method for testing the model that used all of the data for testing and all of the data for validation. The way it works is that it splits the dataset into k different parts. It then uses k - 1 parts for training and the last part for validation. Then it repeats it k times in such a way that all the k-parts has been used in both testing and validation. Then it takes the average accuracy of these models.
+Even tough the model is not over-fitting i decided to try k-fold cross-validation in order to find the accuracy of the model. Cross-validation is a method for testing the model that used all of the data for testing and all of the data for validation. The way it works is that it splits the data set into k different parts. It then uses k - 1 parts for training and the last part for validation. Then it repeats it k times in such a way that all the k-parts has been used in both testing and validation. Then it takes the average accuracy of these models.
 
-In my project I used 10 fold cross validation. Cross validation gave a 31.6\% accuracy wich is worse than the split testing method. This could be a sign that the model is overfitted.
+In my project I used 10 fold cross validation. Cross validation gave a 31.6\% accuracy which is worse than the split testing method. This could be a sign that the model is over fitted.
 \subsubsection{Learning curve}
 A learning curve is a great tool for debugging the model. The learning curve gives you vital information on if the model is learning and if it is the fit is good.
 
@@ -95,7 +95,7 @@ A learning curve is a great tool for debugging the model. The learning curve giv
 
 As you can see in figure \ref{fig:lc} the model is learning. However the training process could benefit from more training examples in order to close the gap between the training accuracy and the validation accuracy. In figure \ref{fig:lc} the x-axis shows number of training examples and y-axis shows the accuracy of the model.
 
-\subsection{Neuralnetworks in h2o}
+\subsection{Neural networks in h2o}
 I have been using the neuralnet package for my predictions up to this point. Neuralnet is an easy to use package. It is great for getting into machine learning and for creating basic learning models with. The problem with neuralnet is its lack of parameter tuning options. Customizing the layers and activation functions is limited.
 
 From this point and on I will use a more advanced machine learning package called h2o. This has more options for tuning and more references.
@@ -121,17 +121,17 @@ For grid search I created a grid with three values.
   \label{fig:grids}
 \end{figure}
 
-In figure \ref{fig:grids} you can se the result of the grid search sorted on what goves the smallest logloss on the set. The figure shows that a network with 2 hidden layers with 10 neurons in each, a input dropout ration of 0.5 and a learning rate of 0.01 gives the best result. When testing the model I get a error rate of 61.3 percent. This is a good improvement from the 62.4 percent i get when i tune the model my self.
+In figure \ref{fig:grids} you can see the result of the grid search sorted on what gives the smallest logloss on the set. The figure shows that a network with 2 hidden layers with 10 neurons in each, a input dropout ration of 0.5 and a learning rate of 0.01 gives the best result. When testing the model I get a error rate of 61.3 percent. This is a good improvement from the 62.4 percent i get when i tune the model my self.
 
 \subsubsection{Optimization}
-Optimization of the neural network is a way to get better predictions. The concept is about minimizing the choosen error function.
-Gradient decent is a method where you find the gradients of the loss function and takes steps where the gradient decreaseas. If the gradient is steep it takes long steps(high step value), if the gradient is less steep it takes a smaller step. In this way it will converge towards the most optimum values for the weights of the neural network. There are many different types of gradient decent algorithms.
+Optimization of the neural network is a way to get better predictions. The concept is about minimizing the chosen error function.
+Gradient decent is a method where you find the gradients of the loss function and takes steps where the gradient decrease. If the gradient is steep it takes long steps(high step value), if the gradient is less steep it takes a smaller step. In this way it will converge towards the most optimum values for the weights of the neural network. There are many different types of gradient decent algorithms.
 
 
-In the CRAN neuralnet package an optimization algorithm called resilliant backrpegation(Rprop) is used. This is a very fast algorithm, however it is complex to implement. The H2o packages uses stochastic gradien descent(SGD). This algorithm takes on single dataset each epoch, and adjusts the weights. The example it chooses is random, and that is why we it is called stochastic.
+In the CRAN neuralnet package an optimization algorithm called resilient backpropegation(Rprop) is used. This is a very fast algorithm, however it is complex to implement. The H2o packages uses stochastic gradient descent(SGD). This algorithm takes on single data set each epoch, and adjusts the weights. The example it chooses is random, and that is why we it is called stochastic\footnote{https://towardsdatascience.com/demystifying-optimizations-for-machine-learning-c6c6405d3eea}.
 
 
-There are not possible to switch optimization algorithms on H2O or neuralnet package. However I can compare how the two models performed. The comparison of the two algorithms will never be accurate because they are run on two different packages. When trying different parameters like the number of epochs, neruons, hidden layers etc, I got the results in figure.
+There are not possible to switch optimization algorithms on H2O or neuralnet package. However I can compare how the two models performed. The comparison of the two algorithms will never be accurate because they are run on two different packages. When trying different parameters like the number of epochs, neurons, hidden layers etc, I got the results in figure.
 
 \begin{figure}[h]
   \centering 
@@ -142,6 +142,55 @@ There are not possible to switch optimization algorithms on H2O or neuralnet pac
 \end{figure}
 
 \subsubsection{Interpretation}
+In order to measure how good the model is at predicting output we need to analyze some rows of the data to analyze the output of the data. In the tables below we see the input row and the output the model gives us.
+
+\paragraph{Input}
+\begin{center}
+\begin{tabular}{ |c|c|c|c|c|c|c|c| } 
+ \hline
+ Row & buying & maint & doors & persons & lugboot & safety & accept \\ 
+ 4 & med & vhigh & 5 & 5 & med & med & acc \\ 
+ \hline
+\end{tabular}
+\end{center}
+
+\paragraph{Output}
+\begin{center}
+\begin{tabular}{ |c|c|c|c|c|c| } 
+ \hline
+ Row & predict & high & low & med & vhigh \\
+ 4 & med & 0.015 & 0.286 & 0.698 & 0.000\\
+ \hline
+\end{tabular}
+\end{center}
+
+\subsubsection{Confidence interval}
+In order to put into perspective how accurate we think our model is, we can use confidence intervals. The problem about using an validation set is that it is just a limited number of rows. We can not test all data that exists.
+
+The confidence interval tells us how sure we are that the acutal error rate is within the interval. In this paper I will find the confidence interval where we are sure that we are 95\% sure that the acutal error rate is within the interval \footnote{https:\/\/machinelearningmastery.com\/confidence-intervals-for-machine-learning\/}.
+
+\begin{lstlisting}[language=R]
+Z <- 1.6          # Z-value from table
+N <- 173          # Number of rows in validation-set
+ERROR <- 0.62     # The given models error-rate
+
+confidence_interval <- function(z_value, n, error_rate) {
+    # Calculates the confidence interval for the given error
+    return (z_value * sqrt((error_rate * (1 - error_rate)) / n))
+}
+
+
+print(confidence_interval(Z, N, ERROR))
+\end{lstlisting}
+
+The resulting interval was 5.9\%. This mean that we are 95\% sure that the error rate is between 0.56 and 0.679.
+\section{Conclusion}
+When starting this project I hoped that I could create a viable model that could categorize what price-range a car would be in based on some predictors. After trying to predict this with both classification trees and neural networks, I would say that the data does not contain the variance to make this possible. More data about the cars would have to be gathered in order to make the prediction accurate.
+
+Both classification trees and neural networks spawned similar results. The classification tree was a lot easier to set up than what the neural network was.
+
+I have tried data preprocessing, feature extraction, encoding, learning curves to try to get better results from the model. Even tough some has improved the accuracy, the total result is not sufficient.
+
 
 \clearpage
 \bibliographystyle{plain}

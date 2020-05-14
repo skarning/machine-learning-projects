@@ -30,6 +30,7 @@ hyperParameters <- list(
     rate=c(0.01, 0.05)
 )
 
+# http://docs.h2o.ai/h2o-tutorials/latest-stable/tutorials/deeplearning/index.html
 grid <- h2o.grid(
     algorithm="deeplearning",
     grid_id="1",
