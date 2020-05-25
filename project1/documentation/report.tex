@@ -3,7 +3,7 @@
 \usepackage{listings}
 \usepackage{graphicx}
 \title{Classifying car price ranges}
-\author{Sivert Marius Skarning\\Subodh Archarya\\and Prameet Archarya}
+\author{Sivert Marius Skarning - 161428\\Subodh Archarya\\and Prameet Archarya}
 \date{March 2020}
 \begin{document}
 \maketitle
@@ -146,27 +146,6 @@ Boosting is an algorithm where multiple model are created. When classifying, all
 \paragraph{Winnowing}
 Winnowing is an algorithm that exclude attributes that does not provide any value able information. When i applied the C5.0 algorithm with winnowing enabled it winnowed three attribute, the number of doors, the number of persons that can fit in the car and the boot size. This had a negative effect on the model and the error rate increased with 4.3 percent.
 
-\section{Scikit Learn and dection trees}
-\subsection{Trees}
-Tree-based models consists of one or more nested if-then statements for the predictors that partition the data.A rule is a set of if-then conditions that have been collapsed into independent conditions.A rule is defined by the tree. A rule is defined as a distinct path through a tree. For the tree, a new sample can only travel down a single path through the tree defined by these rules.Let’s consider an example provided in the book, Applied Predictive Modelling, Chapter 8:If Predictor Ais bigger or equals1.7 then     If predictor B is smaller or equals 202.1 then outcome =1.3. Else outcome =5.6Else outcome = 2.5.
-
-Trees are more sensitive to slight change of parameters. In such cases rules perform rigidly then trees. Rules have there own limitations representing many categories which can be done most effectively by trees.  A  2.5  B  5.6  1.3
-Our data set is taken from http://archive.ics.uci.edu/ml/datasets/Car+Evaluation.The dataset is about predicting the model of car (acceptable, unacceptable, very god, good are the class which represents the model). On the basis of features like comfort, buying price, maintenance price, number of doors, number of passengers, luggage boot size, the class of the car is predicted.We model this data set using R and python separately. Here we will discuss aboutthe finding of dataset by using python and decision tree algorithm for classifying the class.In original data set column name was missing. We assign name to each column. During Exploratory Data Analysis, we find that the number of doors were assigned as 5, which is quite unpractical. And, number of People were mentionedas ‘5more’. It was replaced by an integer value of 6. We used Decision Tree Classifier, which is a function of Scikit learn library.
-
-\subsection{Testing}
-We split the data set into training and testing set in the proportion of 70\% and 30\% respectively. For the object type attributes of column, dummies variable wasused before fitting the data into Decision tree classifier.
-
-\subsection{Result}
-In the figure below you can se the achieved result.
-
-
-  \begin{figure}[h]
-    \centering 
-    \includegraphics[width=0.8\textwidth]
-    {images/confusion}
-    \caption{Confusion matrix}
-    \label{conf}
-  \end{figure}
 
 \section{Conclusion}
 In this project i hoped to achieve much greater accuracy than what I did. I have tried the C5.0 algorithm with several configurations and additional algorithms. The best result I was able to achieve was 58 percent error rate. 58 percent in this domain is not satisfactory for the use cases of this model. I have worked systematically Troy try to improve it without no real breakthrough. In order to improve my model I will try other algorithms like XgBoost. I will also try other data set about cars in order to get more predictors to work with. 
